@@ -6,3 +6,7 @@ Hari ini saya belajar menggunakan Git dan VS Code Web.
 - **Repository**: Tempat menyimpan proyek.
 - **Commit**: Menyimpan foto kondisi file/proyek.
 - **Push**: Mengirim perubahan ke GitHub.
+
+## Next step
+- Memahami cara kerja Branch (Cabang).
+- Belajar kolaborasi lewat pull Request.
