@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Samudra — Siswa PKL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D0F12; --panel:#15181D; --line:#242830;
+  --violet:#7C6FF2; --amber:#FFB454;
+  --text:#EDEFF3; --dim:#8A909C;
+  color-scheme: dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:inherit;}
+html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+html,body{height:100%;}
+body{margin:0; background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif; margin:0;}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{color:inherit;}
+.wrap{max-width:880px; margin:0 auto; padding:0 22px;}
+
+nav{
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(10px);
+  background:rgba(13,15,18,0.82); border-bottom:1px solid var(--line);
+  padding-top:calc(env(safe-area-inset-top,0px) + 16px);
+}
+nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-bottom:16px;}
+.logo{font-weight:600; font-size:1.05rem;}
+.logo .dot{color:var(--violet);}
+.navlinks{display:flex; gap:22px; font-size:0.88rem; color:var(--dim);}
+.navlinks a:hover{color:var(--text);}
+
+section{padding:70px 0;}
+.hero{padding-top:64px;}
+.hero .mono.tag{color:var(--violet); font-size:0.88rem; margin-bottom:14px; display:inline-block;}
+h1{font-size:clamp(2.1rem,5.2vw,3.1rem); line-height:1.12; font-weight:700; letter-spacing:-0.01em;}
+h1 .accent{color:var(--amber);}
+.hero p.lede{color:var(--dim); font-size:1.05rem; line-height:1.65; margin-top:18px; max-width:56ch;}
+.status-row{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;}
+.status{
+  border:1px solid var(--line); background:var(--panel); border-radius:999px;
+  padding:7px 14px; font-size:0.82rem; color:var(--dim); font-family:'JetBrains Mono',monospace;
+}
+.status .dot2{color:var(--amber);}
+.cta-row{display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;}
+.btn{
+  padding:11px 20px; border-radius:9px; font-size:0.9rem; font-weight:600; text-decoration:none;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-primary{background:var(--violet); color:#0D0F12;}
+.btn-primary:hover{background:#9086F5;}
+.btn-ghost{border:1px solid var(--line); color:var(--text);}
+.btn-ghost:hover{border-color:var(--violet);}
+
+h2{font-size:1.5rem; font-weight:600; margin-bottom:22px;}
+.eyebrow{color:var(--violet); font-size:0.82rem; font-weight:600; margin-bottom:8px; display:block;}
+
+.skills{display:flex; flex-wrap:wrap; gap:10px;}
+.skill{
+  border:1px solid var(--line); background:var(--panel); border-radius:8px;
+  padding:8px 14px; font-size:0.85rem; font-family:'JetBrains Mono',monospace; color:var(--dim);
+}
+
+.projects{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px;}
+.proj{
+  background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.proj h3{font-size:1.08rem; font-weight:600;}
+.proj p{color:var(--dim); font-size:0.88rem; line-height:1.55; margin:0; flex:1;}
+.proj .stack{font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--amber);}
+
+.timeline{display:flex; flex-direction:column; gap:0;}
+.trow{display:flex; gap:20px; padding:16px 0; border-bottom:1px solid var(--line);}
+.trow:last-child{border-bottom:none;}
+.trow .when{width:110px; flex-shrink:0; color:var(--dim); font-size:0.82rem; font-family:'JetBrains Mono',monospace; padding-top:2px;}
+.trow .what strong{display:block; font-size:0.98rem; font-weight:600;}
+.trow .what span{color:var(--dim); font-size:0.86rem;}
+
+.achieve-list{display:flex; flex-direction:column; gap:12px;}
+.achieve{
+  background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:15px 18px;
+  display:flex; align-items:center; gap:14px;
+}
+.achieve .medal{font-size:1.4rem;}
+.achieve .info strong{display:block; font-size:0.95rem; font-weight:600;}
+.achieve .info span{color:var(--dim); font-size:0.82rem;}
+
+.contact-row{display:flex; flex-wrap:wrap; gap:12px;}
+.contact-card{
+  border:1px solid var(--line); background:var(--panel); border-radius:10px; padding:16px 20px;
+  text-decoration:none; color:var(--text); flex:1; min-width:160px; font-size:0.9rem;
+}
+.contact-card:hover{border-color:var(--amber);}
+.contact-card .lbl{color:var(--dim); font-size:0.76rem; margin-bottom:4px; display:block;}
+
+footer{border-top:1px solid var(--line); padding:26px 0 50px; color:var(--dim); font-size:0.82rem; text-align:center;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <div class="logo">samudra<span class="dot">.</span>id</div>
+    <div class="navlinks">
+      <a href="#tentang">Tentang</a>
+      <a href="#proyek">Tugas & Proyek</a>
+      <a href="#pengalaman">Pengalaman</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="hero" id="tentang">
+    <span class="mono tag">// halo, perkenalkan</span>
+    <h1>Samudra — <span class="accent">siswa SMK Teknik Jaringan Komputer.</span></h1>
+    <p class="lede">Siswa kelas 12 SMK Negeri 1 Bandung, jurusan Teknik Komputer dan Jaringan (TKJ). Sedang mencari kesempatan PKL untuk mengasah kemampuan instalasi dan pengelolaan jaringan, serta belajar langsung bagaimana tim IT/network bekerja di dunia industri.</p>
+    <div class="status-row">
+      <span class="status"><span class="dot2">●</span> Siap PKL mulai Januari 2027</span>
+      <span class="status">Kelas 12 — TKJ</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#kontak">Hubungi saya</a>
+      <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">Unduh CV (PDF)</a>
+    </div>
+  </section>
+
+  <section id="keahlian">
+    <span class="eyebrow">Keahlian</span>
+    <h2>Kompetensi yang saya kuasai</h2>
+    <div class="skills">
+      <span class="skill">Instalasi & konfigurasi jaringan LAN/WAN</span>
+      <span class="skill">Konfigurasi Mikrotik</span>
+      <span class="skill">Subnetting & routing dasar</span>
+      <span class="skill">Cisco Packet Tracer</span>
+      <span class="skill">Konfigurasi server (DNS, DHCP, FTP)</span>
+      <span class="skill">Crimping & troubleshooting kabel</span>
+      <span class="skill">Microsoft Office</span>
+      <span class="skill">Kerja tim</span>
+      <span class="skill">Disiplin & tepat waktu</span>
+    </div>
+  </section>
+
+  <section id="proyek">
+    <span class="eyebrow">Praktik sekolah</span>
+    <h2>Tugas & proyek yang pernah dikerjakan</h2>
+    <div class="projects">
+      <div class="proj">
+        <h3>Instalasi Jaringan Lab Komputer</h3>
+        <p>Merancang dan memasang jaringan LAN untuk lab komputer sekolah, termasuk penarikan kabel dan konfigurasi switch.</p>
+        <span class="stack">Mikrotik · Switch Manageable · Crimping</span>
+      </div>
+      <div class="proj">
+        <h3>Simulasi Jaringan Kantor Kecil</h3>
+        <p>Merancang topologi jaringan untuk kantor kecil lengkap dengan routing dan pembagian VLAN, sebagai proyek akhir semester.</p>
+        <span class="stack">Cisco Packet Tracer · VLAN · Routing</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="pengalaman">
+    <span class="eyebrow">Rekam jejak</span>
+    <h2>Pendidikan & organisasi</h2>
+    <div class="timeline">
+      <div class="trow">
+        <div class="when">2023 — kini</div>
+        <div class="what"><strong>SMK Negeri 1 Bandung</strong><span>Jurusan Teknik Komputer dan Jaringan, kelas 12</span></div>
+      </div>
+      <div class="trow">
+        <div class="when">2024 — kini</div>
+        <div class="what"><strong>Ekstrakurikuler Robotik</strong><span>Anggota tim pemrograman</span></div>
+      </div>
+      <div class="trow">
+        <div class="when">2023 — 2024</div>
+        <div class="what"><strong>OSIS</strong><span>Staf divisi teknologi informasi</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sertifikat">
+    <span class="eyebrow">Bukti kompetensi</span>
+    <h2>Sertifikat & prestasi</h2>
+    <div class="achieve-list">
+      <div class="achieve"><div class="medal">📜</div><div class="info"><strong>Sertifikat Dasar Administrasi Jaringan Mikrotik</strong><span>Pelatihan internal sekolah — 2025</span></div></div>
+      <div class="achieve"><div class="medal">🏆</div><div class="info"><strong>Juara 2 Lomba Kompetensi Siswa (LKS) — Networking</strong><span>Tingkat kota — 2025</span></div></div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <span class="eyebrow">Kontak</span>
+    <h2>Hubungi saya untuk kesempatan PKL</h2>
+    <div class="contact-row">
+      <a class="contact-card" href="mailto:samudra@contoh.com"><span class="lbl">Email</span>samudra@contoh.com</a>
+      <a class="contact-card" href="https://wa.me/6281200000000" target="_blank" rel="noopener"><span class="lbl">WhatsApp</span>+62 812-0000-0000</a>
+      <a class="contact-card" href="https://linkedin.com/in/samudra" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span>linkedin.com/in/samudra</a>
+    </div>
+  </section>
+</div>
+
+<footer>© 2026 Samudra. Siswa SMK — siap PKL.</footer>
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Samudra — Siswa PKL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D0F12; --panel:#15181D; --line:#242830;
+  --violet:#7C6FF2; --amber:#FFB454;
+  --text:#EDEFF3; --dim:#8A909C;
+  color-scheme: dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:inherit;}
+html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+html,body{height:100%;}
+body{margin:0; background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif; margin:0;}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{color:inherit;}
+.wrap{max-width:880px; margin:0 auto; padding:0 22px;}
+
+nav{
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(10px);
+  background:rgba(13,15,18,0.82); border-bottom:1px solid var(--line);
+  padding-top:calc(env(safe-area-inset-top,0px) + 16px);
+}
+nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-bottom:16px;}
+.logo{font-weight:600; font-size:1.05rem;}
+.logo .dot{color:var(--violet);}
+.navlinks{display:flex; gap:22px; font-size:0.88rem; color:var(--dim);}
+.navlinks a:hover{color:var(--text);}
+
+section{padding:70px 0;}
+.hero{padding-top:64px;}
+.hero .mono.tag{color:var(--violet); font-size:0.88rem; margin-bottom:14px; display:inline-block;}
+h1{font-size:clamp(2.1rem,5.2vw,3.1rem); line-height:1.12; font-weight:700; letter-spacing:-0.01em;}
+h1 .accent{color:var(--amber);}
+.hero p.lede{color:var(--dim); font-size:1.05rem; line-height:1.65; margin-top:18px; max-width:56ch;}
+.status-row{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;}
+.status{
+  border:1px solid var(--line); background:var(--panel); border-radius:999px;
+  padding:7px 14px; font-size:0.82rem; color:var(--dim); font-family:'JetBrains Mono',monospace;
+}
+.status .dot2{color:var(--amber);}
+.cta-row{display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;}
+.btn{
+  padding:11px 20px; border-radius:9px; font-size:0.9rem; font-weight:600; text-decoration:none;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-primary{background:var(--violet); color:#0D0F12;}
+.btn-primary:hover{background:#9086F5;}
+.btn-ghost{border:1px solid var(--line); color:var(--text);}
+.btn-ghost:hover{border-color:var(--violet);}
+
+h2{font-size:1.5rem; font-weight:600; margin-bottom:22px;}
+.eyebrow{color:var(--violet); font-size:0.82rem; font-weight:600; margin-bottom:8px; display:block;}
+
+.skills{display:flex; flex-wrap:wrap; gap:10px;}
+.skill{
+  border:1px solid var(--line); background:var(--panel); border-radius:8px;
+  padding:8px 14px; font-size:0.85rem; font-family:'JetBrains Mono',monospace; color:var(--dim);
+}
+
+.projects{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px;}
+.proj{
+  background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.proj h3{font-size:1.08rem; font-weight:600;}
+.proj p{color:var(--dim); font-size:0.88rem; line-height:1.55; margin:0; flex:1;}
+.proj .stack{font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--amber);}
+
+.timeline{display:flex; flex-direction:column; gap:0;}
+.trow{display:flex; gap:20px; padding:16px 0; border-bottom:1px solid var(--line);}
+.trow:last-child{border-bottom:none;}
+.trow .when{width:110px; flex-shrink:0; color:var(--dim); font-size:0.82rem; font-family:'JetBrains Mono',monospace; padding-top:2px;}
+.trow .what strong{display:block; font-size:0.98rem; font-weight:600;}
+.trow .what span{color:var(--dim); font-size:0.86rem;}
+
+.achieve-list{display:flex; flex-direction:column; gap:12px;}
+.achieve{
+  background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:15px 18px;
+  display:flex; align-items:center; gap:14px;
+}
+.achieve .medal{font-size:1.4rem;}
+.achieve .info strong{display:block; font-size:0.95rem; font-weight:600;}
+.achieve .info span{color:var(--dim); font-size:0.82rem;}
+
+.contact-row{display:flex; flex-wrap:wrap; gap:12px;}
+.contact-card{
+  border:1px solid var(--line); background:var(--panel); border-radius:10px; padding:16px 20px;
+  text-decoration:none; color:var(--text); flex:1; min-width:160px; font-size:0.9rem;
+}
+.contact-card:hover{border-color:var(--amber);}
+.contact-card .lbl{color:var(--dim); font-size:0.76rem; margin-bottom:4px; display:block;}
+
+footer{border-top:1px solid var(--line); padding:26px 0 50px; color:var(--dim); font-size:0.82rem; text-align:center;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <div class="logo">samudra<span class="dot">.</span>id</div>
+    <div class="navlinks">
+      <a href="#tentang">Tentang</a>
+      <a href="#proyek">Tugas & Proyek</a>
+      <a href="#pengalaman">Pengalaman</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="hero" id="tentang">
+    <span class="mono tag">// halo, perkenalkan</span>
+    <h1>Samudra — <span class="accent">siswa SMK Teknik Jaringan Komputer.</span></h1>
+    <p class="lede">Siswa kelas 12 SMK Negeri 1 Bandung, jurusan Teknik Komputer dan Jaringan (TKJ). Sedang mencari kesempatan PKL untuk mengasah kemampuan instalasi dan pengelolaan jaringan, serta belajar langsung bagaimana tim IT/network bekerja di dunia industri.</p>
+    <div class="status-row">
+      <span class="status"><span class="dot2">●</span> Siap PKL mulai Januari 2027</span>
+      <span class="status">Kelas 12 — TKJ</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#kontak">Hubungi saya</a>
+      <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">Unduh CV (PDF)</a>
+    </div>
+  </section>
+
+  <section id="keahlian">
+    <span class="eyebrow">Keahlian</span>
+    <h2>Kompetensi yang saya kuasai</h2>
+    <div class="skills">
+      <span class="skill">Instalasi & konfigurasi jaringan LAN/WAN</span>
+      <span class="skill">Konfigurasi Mikrotik</span>
+      <span class="skill">Subnetting & routing dasar</span>
+      <span class="skill">Cisco Packet Tracer</span>
+      <span class="skill">Konfigurasi server (DNS, DHCP, FTP)</span>
+      <span class="skill">Crimping & troubleshooting kabel</span>
+      <span class="skill">Microsoft Office</span>
+      <span class="skill">Kerja tim</span>
+      <span class="skill">Disiplin & tepat waktu</span>
+    </div>
+  </section>
+
+  <section id="proyek">
+    <span class="eyebrow">Praktik sekolah</span>
+    <h2>Tugas & proyek yang pernah dikerjakan</h2>
+    <div class="projects">
+      <div class="proj">
+        <h3>Instalasi Jaringan Lab Komputer</h3>
+        <p>Merancang dan memasang jaringan LAN untuk lab komputer sekolah, termasuk penarikan kabel dan konfigurasi switch.</p>
+        <span class="stack">Mikrotik · Switch Manageable · Crimping</span>
+      </div>
+      <div class="proj">
+        <h3>Simulasi Jaringan Kantor Kecil</h3>
+        <p>Merancang topologi jaringan untuk kantor kecil lengkap dengan routing dan pembagian VLAN, sebagai proyek akhir semester.</p>
+        <span class="stack">Cisco Packet Tracer · VLAN · Routing</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="pengalaman">
+    <span class="eyebrow">Rekam jejak</span>
+    <h2>Pendidikan & organisasi</h2>
+    <div class="timeline">
+      <div class="trow">
+        <div class="when">2023 — kini</div>
+        <div class="what"><strong>SMK Negeri 1 Bandung</strong><span>Jurusan Teknik Komputer dan Jaringan, kelas 12</span></div>
+      </div>
+      <div class="trow">
+        <div class="when">2024 — kini</div>
+        <div class="what"><strong>Ekstrakurikuler Robotik</strong><span>Anggota tim pemrograman</span></div>
+      </div>
+      <div class="trow">
+        <div class="when">2023 — 2024</div>
+        <div class="what"><strong>OSIS</strong><span>Staf divisi teknologi informasi</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sertifikat">
+    <span class="eyebrow">Bukti kompetensi</span>
+    <h2>Sertifikat & prestasi</h2>
+    <div class="achieve-list">
+      <div class="achieve"><div class="medal">📜</div><div class="info"><strong>Sertifikat Dasar Administrasi Jaringan Mikrotik</strong><span>Pelatihan internal sekolah — 2025</span></div></div>
+      <div class="achieve"><div class="medal">🏆</div><div class="info"><strong>Juara 2 Lomba Kompetensi Siswa (LKS) — Networking</strong><span>Tingkat kota — 2025</span></div></div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <span class="eyebrow">Kontak</span>
+    <h2>Hubungi saya untuk kesempatan PKL</h2>
+    <div class="contact-row">
+      <a class="contact-card" href="mailto:samudra@contoh.com"><span class="lbl">Email</span>samudra@contoh.com</a>
+      <a class="contact-card" href="https://wa.me/6281200000000" target="_blank" rel="noopener"><span class="lbl">WhatsApp</span>+62 812-0000-0000</a>
+      <a class="contact-card" href="https://linkedin.com/in/samudra" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span>linkedin.com/in/samudra</a>
+    </div>
+  </section>
+</div>
+
+<footer>© 2026 Samudra. Siswa SMK — siap PKL.</footer>
+</body>
+</html>
